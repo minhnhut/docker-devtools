@@ -1,0 +1,29 @@
+version: '3'
+services:
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'password'
+            MYSQL_ROOT_HOST: '172.18.0.0/16'
+        volumes:
+            - './mysql:/var/lib/mysql'
+    pgsql:
+        image: 'postgres:15'
+        ports:
+            - '5432:5432'
+        environment:
+            PGPASSWORD: 'password'
+            POSTGRES_DB: 'localdb'
+            POSTGRES_USER: 'minhnhut'
+            POSTGRES_PASSWORD: 'password'
+        volumes:
+            - './pgsql:/var/lib/postgresql/data'
+    mailpit:
+        image: 'axllent/mailpit'
+        ports:
+            - 1025:1025
+            - 8025:8025
+        volumes:
+          - './mailpit:/data'
